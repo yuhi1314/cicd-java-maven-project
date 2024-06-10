@@ -10,7 +10,7 @@ spec:
     - name: cicd-java-maven
       port: 80
       protocol: TCP
-      targetPort: 8080
+      targetPort: 8093
   selector:
     app: cicd-java-maven
   type: ClusterIP
