@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: Always
           name: cicd-java-maven
           ports:
-            - containerPort: 8093
+            - containerPort: 8080
               name: cicd-java-maven
               protocol: TCP
           resources:
