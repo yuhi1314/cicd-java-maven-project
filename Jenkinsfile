@@ -1,18 +1,21 @@
 pipeline {
-
   agent any
 
   environment {
-    DOCKERHUB_CREDENTIALS=credentials('TestDocker') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
+    registry = "yuhi1314/phpk8s"
+    registryCredential = '188ab87c-8a6d-48c7-b5e8-34dc6e75e50a'
+    dockerImage = ''
+  }
+  tools {
+    jdk 'jdk11'
+    maven 'maven'
   }
 
-
   stages {
-
     stage("Git Checkout") {
       steps {
         script {
-           sh "git clone https://github.com/DashrathMundkar/cicd-java-maven-project.git"
+          git branch: 'main', url: 'https://github.com/yuhi1314/cicd-java-maven-project.git'
         }
       }
     }
@@ -24,33 +27,27 @@ pipeline {
         }
       }
     }
+    
+    stage("Test Cases") {
+        steps {
+           sh "mvn test"
+            }
+    }
 
-   stage("Run SonarQube Analysis") {
+    stage('Building our image') {
       steps {
         script {
-          withSonarQubeEnv('YOUR_SonarQube_INSTALLATION_NAME') {
-           sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way"'
-          }
-          try {
-            timeout(time: 5, unit: 'MINUTES') { // pipeline will be killed after a timeout
-              def qg = waitForQualityGate()
-              if (qg.status != 'OK') {
-                error "Pipeline aborted due to quality gate failure: ${qg.status}"
-              }
-            }
-          } catch (e) {
-            throw e
-          }
+          dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
         }
       }
     }
 
-    stage("Build & Push Docker Image") {
+    stage('Deploy our image') {
       steps {
         script {
-          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          sh "docker build -t dash18/cicd-java-maven ."
-          sh "docker push dash18/cicd-java-maven"
+          docker.withRegistry('', registryCredential) {
+            dockerImage.push()
+          }
         }
       }
     }
@@ -58,11 +55,12 @@ pipeline {
     stage("Apply the Kubernetes files") {
       steps {
         script {
-          sh "kubectl apply -f kubernetes/ "
+          sh "kubectl apply -f kubernetes/"
         }
       }
     }
   }
+
   post {
     always {
       script {
