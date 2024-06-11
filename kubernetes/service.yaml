@@ -8,10 +8,9 @@ metadata:
 spec:
   ports:
     - name: cicd-java-maven
-      port: 8093
+      port: 80
       protocol: TCP
       targetPort: 8080
   selector:
     app: cicd-java-maven
-  type: LoadBalancer
-
+  type: ClusterIP
