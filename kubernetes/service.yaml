@@ -5,12 +5,10 @@ metadata:
   name: cicd-java-maven
   namespace: cicd-java-maven
 spec:
-  type: LoadBalancer
-  externalIPs:
-  - 185.119.196.182
-  selector:
+ selector:
     app: cicd-java-maven
-  ports:
-  - port: 8093
-    targetPort: 8080
-    protocol: TCP
+ ports:
+   - protocol: TCP
+     port: 8093
+     targetPort: 8080
+ type: NodePort
