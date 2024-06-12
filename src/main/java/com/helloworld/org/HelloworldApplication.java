@@ -11,6 +11,7 @@ public class HelloworldApplication {
 	private static final Logger logger = LoggerFactory.getLogger(HelloworldApplication.class);
 
 	public static void main(String[] args) {
+		logger.info("Server started");
 		SpringApplication.run(HelloworldApplication.class, args);
 	}
 }
