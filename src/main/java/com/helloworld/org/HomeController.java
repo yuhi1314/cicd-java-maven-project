@@ -14,10 +14,11 @@ public class HomeController {
 
   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-  @GetMapping("/")
-  public String home() {
-    logger.info("Страница домашней страницы открыта");
-    // Остальная логика метода
-    return "home";
-  }
+  @GetMapping(
+            path = "/",)
+    public Object status() {
+        logger.info("Status check");
+        return "Service is alive";
+    }
 }
+
