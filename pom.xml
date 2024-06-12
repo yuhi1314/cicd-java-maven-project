@@ -16,9 +16,6 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-	<properties>
-	    <log.file.name>logs/hello_world.log</log.file.name>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
