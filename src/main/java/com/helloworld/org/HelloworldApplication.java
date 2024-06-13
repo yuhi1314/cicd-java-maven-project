@@ -1,7 +1,7 @@
 package com.helloworld.org;
 
 import org.apache.logging.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.core.config.Configurator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
