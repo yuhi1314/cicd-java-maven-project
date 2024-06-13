@@ -25,11 +25,10 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: logs-volume
-              mountPath: logs.log
+              mountPath: /logs.log
       volumes:
         - name: logs-volume
-          hostPath:
-            path: logs.log
+          emptyDir: {}
   resources:
     limits:
       cpu: "1"
