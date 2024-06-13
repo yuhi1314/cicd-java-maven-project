@@ -15,7 +15,7 @@ pipeline {
     stage("Git Checkout") {
       steps {
         script {
-          git branch: 'main', url: 'https://github.com/yuhi1314/cicd-java-maven-project.git'
+          git branch: 'master', url: 'https://github.com/yuhi1314/cicd-java-maven-project.git'
         }
       }
     }
