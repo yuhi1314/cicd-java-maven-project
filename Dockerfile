@@ -2,7 +2,7 @@ FROM openjdk:8-jdk-alpine
 
 ADD ./target/helloworld-0.0.1-SNAPSHOT.jar helloworld-0.0.1-SNAPSHOT.jar
 
-RUN mkdir -pv ./log4j2/lib
+RUN mkdir -pv log4j2/lib
 COPY ["./log4j2.properties", "/cicd-java-maven"]
 
 EXPOSE 8080
