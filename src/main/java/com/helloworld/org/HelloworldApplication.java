@@ -2,13 +2,14 @@ package com.helloworld.org;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class HelloworldApplication {
-    private static final Logger logger = Logger.getLogger(HelloworldApplication.class);
+    private static final Logger logger = LogManager.getLogger(HelloworldApplication.class);
 
     public static void main(String[] args) {
         PropertyConfigurator.configure("log4j.properties");
