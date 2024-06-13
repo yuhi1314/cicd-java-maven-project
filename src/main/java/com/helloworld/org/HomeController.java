@@ -1,20 +1,19 @@
 package com.helloworld.org;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-@Controller
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class HomeController {
-  private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-  @GetMapping(
-            path = "/"
-    )
-  @ResponseBody
-  public String status() {
-      logger.info("Status check");
-      return "Service is alive";
-  }
+    private static final Logger logger = Logger.getLogger(HomeController.class);
+
+    @GetMapping(path = "/", produces = "text/plain")
+    public ResponseEntity<String> status() {
+        PropertyConfigurator.configure("log4j.properties");
+        logger.info("Status check");
+        return ResponseEntity.ok("Service is alive");
+    }
 }
