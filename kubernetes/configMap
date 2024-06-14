@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+data:
+  application.properties: |-
+    # This comment means that this is coming from k8s ConfigMap. Nice!
+    server.port=8999
+    .
+    .
+    .
+    .
+
+metadata:
+  name: my-project-config
+  namespace: cicd-java-maven
