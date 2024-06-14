@@ -25,7 +25,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: my-project-config
-              mountPath: /logs/log
+              mountPath: logs/log
           ports:
             - containerPort: 8080
       volumes:
