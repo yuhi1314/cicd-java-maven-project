@@ -23,9 +23,15 @@ spec:
             - containerPort: 8080
               name: cicd-java-maven
               protocol: TCP
+           env:
+            - name: JAVA_OPTS
+              value: "-Dspring.config.location=/opt/config"
+            .
+            .
+            .
           volumeMounts:
             - name: my-project-config
-              mountPath: logs/log
+              mountPath: /opt/config
           ports:
             - containerPort: 8080
       volumes:
