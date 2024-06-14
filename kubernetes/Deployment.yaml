@@ -24,9 +24,11 @@ spec:
               name: cicd-java-maven
               protocol: TCP
           volumeMounts:
-            - name: logs-volume
-              mountPath: /logs.log
+            - name: my-project-config
+              mountPath: /logs/log
+          ports:
+            - containerPort: 8080
       volumes:
-        - name: logs-volume
-          persistentVolumeClaim:
-            claimName: logs-pvc
+        - name: my-project-config
+          configMap:
+            name: my-project-config
